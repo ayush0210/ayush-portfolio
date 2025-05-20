@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Ayush Mishra - Mobile Developer & Software Engineer',
     description: 'Android Developer with expertise in Kotlin, React Native, and scalable backend systems.',
-    url: 'https://ayushmishra.dev', // Update with your actual domain
+    url: '',
     siteName: 'Ayush Mishra Portfolio',
     type: 'website',
   },

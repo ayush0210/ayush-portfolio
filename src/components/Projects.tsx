@@ -127,7 +127,7 @@ const Projects = () => {
             >
               {/* Project Image */}
               <div className="relative h-48 bg-gradient-to-br from-blue-500 to-purple-600 overflow-hidden">
-                {/* Placeholder for now - replace with actual project screenshots */}
+                {/* Placeholder for now  */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-white text-6xl opacity-20">
                     {index === 0 && <Award />}
