@@ -67,7 +67,7 @@ const About = () => {
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Passionate about building scalable mobile applications and backend systems. 
-            Here's what I bring to the table:
+            Here&apos;s what I bring to the table:
           </p>
         </motion.div>
 

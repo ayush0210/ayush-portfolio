@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Award, Users, Zap, Star } from 'lucide-react';
-import Image from 'next/image';
 
 const Projects = () => {
   const projects = [
@@ -127,7 +126,7 @@ const Projects = () => {
             >
               {/* Project Image */}
               <div className="relative h-48 bg-gradient-to-br from-blue-500 to-purple-600 overflow-hidden">
-                {/* Placeholder for now  */}
+                {/* Placeholder for now - replace with actual project screenshots */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-white text-6xl opacity-20">
                     {index === 0 && <Award />}

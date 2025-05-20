@@ -64,10 +64,10 @@ const Contact = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-            Let's Build Something Amazing
+            Let&apos;s Build Something Amazing
           </h2>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-            I'm always interested in discussing new opportunities, innovative projects, 
+            I&apos;m always interested in discussing new opportunities, innovative projects, 
             and ways to create impact through technology.
           </p>
         </motion.div>
@@ -84,8 +84,8 @@ const Contact = () => {
             <div>
               <h3 className="text-2xl font-bold text-white mb-6">Get in Touch</h3>
               <p className="text-blue-100 leading-relaxed mb-8">
-                Whether you're a recruiter looking for top talent, a startup seeking technical leadership, 
-                or a fellow developer interested in collaboration, I'd love to hear from you!
+                Whether you&apos;re a recruiter looking for top talent, a startup seeking technical leadership, 
+                or a fellow developer interested in collaboration, I&apos;d love to hear from you!
               </p>
             </div>
 
@@ -162,7 +162,7 @@ const Contact = () => {
               
               <div className="space-y-4">
                 <a
-                  href="mailto:mishra.ayush.mscse@gmail.com?subject=Job Opportunity&body=Hi Ayush, I'd like to discuss a potential opportunity with you."
+                  href="mailto:mishra.ayush.mscse@gmail.com?subject=Job Opportunity&body=Hi Ayush, I&apos;d like to discuss a potential opportunity with you."
                   className="flex items-center gap-3 bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition-all duration-300 w-full justify-center"
                 >
                   <MessageCircle className="w-5 h-5" />
