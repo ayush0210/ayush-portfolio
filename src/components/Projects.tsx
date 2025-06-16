@@ -1,13 +1,15 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Award, Users, Zap, Star } from 'lucide-react';
+import { Github, Award, Users, Zap, Star } from 'lucide-react';
+import { useState } from 'react';
 
 const Projects = () => {
+  const [expandedTech, setExpandedTech] = useState<Record<number, boolean>>({});
   const projects = [
     {
       title: "Interactive Learning Platform",
-      subtitle: "🏆 ShellHacks 2024 Hackathon Winner",
+      subtitle: "React.js Learning Application",
       description: "Architected a responsive React.js frontend with reusable UI components and custom hooks, achieving 40% faster development cycles and real-time content synchronization.",
       image: "/images/projects/learning-platform.jpg",
       technologies: ["React.js", "TypeScript", "Material-UI", "React Query", "Web Speech API", "CSS Modules"],
@@ -18,56 +20,51 @@ const Projects = () => {
         "Accessible design with ARIA attributes",
         "35% reduction in initial load time"
       ],
-      githubUrl: "https://github.com/ayush-mishra/learning-platform",
-      liveUrl: "https://learning-platform-demo.vercel.app",
-      awards: ["Best UI/UX Design", "Most Innovative Solution"],
+      githubUrl: "https://github.com/ayush0210/quickquizz-frontend",
       stats: {
         icon: <Award className="w-5 h-5" />,
-        value: "Hackathon Winner",
-        label: "ShellHacks 2024"
+        value: "React.js",
+        label: "Frontend App"
       }
     },
     {
-      title: "Video Streaming Infrastructure",
-      subtitle: "Enterprise-Scale Streaming Solution",
-      description: "Built scalable video streaming system supporting millions of concurrent users with adaptive bitrate streaming and advanced caching mechanisms.",
-      image: "/images/projects/video-streaming.jpg",
-      technologies: ["Kotlin", "ExoPlayer", "DASH/HLS", "Room Database", "WorkManager", "Kotlin Coroutines", "Material Design 3"],
+      title: "UF Parenting Assistant App",
+      subtitle: "Geofencing & AI-Driven Content",
+      description: "Cross-platform app built with React Native that delivers location-based parenting tips, real-time updates via WebSocket, and OpenAI-powered voice assistant.",
+      image: "/images/projects/uf-parenting-app.jpg",
+      technologies: ["React Native", "Express.js", "MySQL", "WebSocket", "OpenAI API", "Redux"],
       features: [
-        "Support for 22.7M concurrent users during FIFA World Cup",
-        "40% reduction in streaming latency",
-        "30% bandwidth consumption reduction",
-        "Picture-in-picture mode implementation",
-        "Offline playback functionality"
+        "Real-time updates with WebSocket",
+        "AI-generated tips using OpenAI API",
+        "Geolocation & geofencing features",
+        "Offline-first architecture with Async Storage",
+        "Voice assistant with speech recognition"
       ],
-      githubUrl: "https://github.com/ayush-mishra/video-streaming",
-      awards: ["Production Ready", "Enterprise Scale"],
+      githubUrl: "",
       stats: {
-        icon: <Users className="w-5 h-5" />,
-        value: "22.7M+",
-        label: "Concurrent Users"
+        icon: <Zap className="w-5 h-5" />,
+        value: "Live",
+        label: "UF Research App"
       }
     },
     {
       title: "Daily News Android App",
-      subtitle: "Published on Google Play Store",
-      description: "Android application providing seamless news reading experience with intuitive UI design, published to Google Play Store with positive user feedback.",
+      subtitle: "Android News Application",
+      description: "Android application providing seamless news reading experience with intuitive UI design and efficient data management using modern Android development practices.",
       image: "/images/projects/daily-news.jpg",
       technologies: ["Android", "Kotlin", "Retrofit", "Room Database", "Material Design", "MVVM Architecture"],
       features: [
-        "Published on Google Play Store",
-        "Efficient HTTP requests with Retrofit",
-        "Offline reading capabilities",
         "Clean and intuitive user interface",
+        "Efficient HTTP requests with Retrofit",
+        "Offline reading capabilities with Room Database",
+        "MVVM architecture for scalable code",
         "Real-time news updates"
       ],
       githubUrl: "https://github.com/ayush0210/-Daily-news-android",
-      liveUrl: "https://play.google.com/store/apps/details?id=com.ayush.dailynews",
-      awards: ["Play Store Published", "User Approved"],
       stats: {
         icon: <Star className="w-5 h-5" />,
-        value: "Published",
-        label: "Google Play Store"
+        value: "Android",
+        label: "Mobile App"
       }
     }
   ];
@@ -107,7 +104,7 @@ const Projects = () => {
             Featured Projects
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Showcasing scalable applications that have served millions of users and won prestigious awards
+            Showcasing scalable applications and innovative solutions
           </p>
         </motion.div>
 
@@ -143,20 +140,6 @@ const Projects = () => {
                     <div className="text-gray-600">{project.stats.label}</div>
                   </div>
                 </div>
-
-                {/* Awards Badge */}
-                <div className="absolute bottom-4 left-4">
-                  <div className="flex gap-2">
-                    {project.awards.map((award, awardIndex) => (
-                      <span
-                        key={awardIndex}
-                        className="bg-yellow-400 text-yellow-900 text-xs px-2 py-1 rounded-full font-semibold"
-                      >
-                        {award}
-                      </span>
-                    ))}
-                  </div>
-                </div>
               </div>
 
               {/* Project Content */}
@@ -189,7 +172,7 @@ const Projects = () => {
                 {/* Technologies */}
                 <div className="mb-6">
                   <div className="flex flex-wrap gap-1 mb-3">
-                    {project.technologies.slice(0, 4).map((tech, techIndex) => (
+                    {(expandedTech[index] ? project.technologies : project.technologies.slice(0, 4)).map((tech, techIndex) => (
                       <span
                         key={techIndex}
                         className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-md font-medium"
@@ -197,17 +180,28 @@ const Projects = () => {
                         {tech}
                       </span>
                     ))}
-                    {project.technologies.length > 4 && (
-                      <span className="px-2 py-1 bg-gray-50 text-gray-600 text-xs rounded-md">
+                    {project.technologies.length > 4 && !expandedTech[index] && (
+                      <button
+                        onClick={() => setExpandedTech(prev => ({...prev, [index]: true}))}
+                        className="px-2 py-1 bg-gray-50 text-gray-600 text-xs rounded-md hover:bg-gray-100 transition-colors duration-200 cursor-pointer"
+                      >
                         +{project.technologies.length - 4} more
-                      </span>
+                      </button>
+                    )}
+                    {expandedTech[index] && project.technologies.length > 4 && (
+                      <button
+                        onClick={() => setExpandedTech(prev => ({...prev, [index]: false}))}
+                        className="px-2 py-1 bg-gray-50 text-gray-600 text-xs rounded-md hover:bg-gray-100 transition-colors duration-200 cursor-pointer"
+                      >
+                        Show less
+                      </button>
                     )}
                   </div>
                 </div>
 
                 {/* Action Buttons */}
                 <div className="flex gap-3">
-                  {project.githubUrl && (
+                  {project.githubUrl ? (
                     <a
                       href={project.githubUrl}
                       target="_blank"
@@ -215,20 +209,13 @@ const Projects = () => {
                       className="flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors duration-300 text-sm font-medium flex-1 justify-center"
                     >
                       <Github className="w-4 h-4" />
-                      Code
+                      View Code
                     </a>
-                  )}
-                  
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 text-sm font-medium flex-1 justify-center"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      Demo
-                    </a>
+                  ) : (
+                    <div className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-500 rounded-lg text-sm font-medium flex-1 justify-center">
+                      <Github className="w-4 h-4" />
+                      Private Repository
+                    </div>
                   )}
                 </div>
               </div>
@@ -252,7 +239,7 @@ const Projects = () => {
               Check out my GitHub for more projects, code samples, and contributions to open source.
             </p>
             <a
-              href="https://github.com/ayush-mishra"
+              href="https://github.com/ayush0210"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-gray-800 text-white px-8 py-3 rounded-xl font-semibold hover:bg-gray-700 transition-all duration-300 hover:transform hover:-translate-y-1"
