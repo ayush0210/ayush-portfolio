@@ -61,7 +61,7 @@ const Projects = () => {
         "Clean and intuitive user interface",
         "Real-time news updates"
       ],
-      githubUrl: "https://github.com/ayush-mishra/daily-news",
+      githubUrl: "https://github.com/ayush0210/-Daily-news-android",
       liveUrl: "https://play.google.com/store/apps/details?id=com.ayush.dailynews",
       awards: ["Play Store Published", "User Approved"],
       stats: {
