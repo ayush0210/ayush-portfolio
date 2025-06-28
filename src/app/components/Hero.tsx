@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { Mail, Code, Download } from 'lucide-react';
-import Image from 'next/image';
 
 const Hero = () => {
   return (
@@ -61,7 +60,20 @@ const Hero = () => {
               </a>
               
               <a
-                href="mailto:mishra.ayush.mscse@gmail.com"
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.getElementById('contact');
+                  if (element) {
+                    const headerOffset = 80;
+                    const elementPosition = element.offsetTop;
+                    const offsetPosition = elementPosition - headerOffset;
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: 'smooth'
+                    });
+                  }
+                }}
                 className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold flex items-center justify-center gap-2 hover:bg-white hover:text-blue-600 transition-all duration-300"
               >
                 <Mail size={20} />
@@ -91,14 +103,16 @@ const Hero = () => {
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               className="relative"
             >
-              <div className="w-80 h-80 rounded-full bg-white/20 backdrop-blur-sm p-4 shadow-2xl">
-                <Image
+              <div className="w-80 h-80 rounded-full bg-white/20 p-4 shadow-2xl overflow-hidden">
+                <img
                   src="/images/profile.jpg"
                   alt="Ayush Mishra"
-                  width={300}
-                  height={300}
-                  className="rounded-full object-cover w-full h-full"
-                  priority
+                  className="w-full h-full rounded-full object-cover"
+                  style={{
+                    display: 'block',
+                    objectFit: 'cover',
+                    objectPosition: 'center'
+                  }}
                 />
               </div>
             </motion.div>
