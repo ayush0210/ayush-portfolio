@@ -23,7 +23,7 @@ const Hero = () => {
             >
               Ayush Mishra
               <br />
-              <span className="text-yellow-300">Mobile Developer</span>
+              <span className="text-yellow-300">Software Developer</span>
             </motion.h1>
             
             <motion.p 
