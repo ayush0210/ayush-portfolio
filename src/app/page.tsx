@@ -21,7 +21,7 @@ export default function Home() {
 }
 
 export const metadata = {
-  title: 'Ayush Mishra - Mobile Developer & Software Engineer',
-  description: 'Android Developer with expertise in Kotlin, React Native, and scalable backend systems. Currently pursuing Masters in Computer Science at University of Florida.',
-  keywords: 'Android Developer, Mobile Developer, Kotlin, React Native, Software Engineer, Ayush Mishra',
+  title: 'Ayush Mishra - Software Engineer',
+  description: 'Software Engineer with 2+ years of experience delivering scalable, customer-obsessed solutions for millions of users. Strong CS fundamentals in building fault-tolerant, distributed applications.',
+  keywords: 'Software Engineer, Mobile Developer, Kotlin, React Native, Android, Full Stack, Ayush Mishra',
 };

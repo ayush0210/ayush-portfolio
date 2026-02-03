@@ -1,55 +1,40 @@
 'use client';
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Github, ExternalLink, Smartphone, Globe, Cpu, ArrowUpRight } from 'lucide-react';
+import { Github, ExternalLink, Smartphone, Cpu, ArrowUpRight } from 'lucide-react';
 import { useRef } from 'react';
 
 const Projects = () => {
   const projects = [
     {
-      title: "Interactive Learning Platform",
-      subtitle: "React.js Learning Application",
-      description: "Architected a responsive React.js frontend with reusable UI components and custom hooks, achieving 40% faster development cycles.",
-      technologies: ["React.js", "TypeScript", "Material-UI", "React Query"],
-      features: [
-        "40% faster development cycles",
-        "98% positive feedback",
-        "Real-time synchronization"
-      ],
-      githubUrl: "https://github.com/ayush0210/quickquizz-frontend",
-      icon: <Globe className="w-6 h-6" />,
-      gradient: "from-blue-500 to-cyan-500",
-      accentColor: "cyan"
-    },
-    {
-      title: "UF Parenting Assistant",
-      subtitle: "Geofencing & AI-Driven App",
-      description: "Cross-platform React Native app with location-based tips, real-time WebSocket updates, and OpenAI-powered voice assistant.",
-      technologies: ["React Native", "Express.js", "WebSocket", "OpenAI API"],
-      features: [
-        "AI-powered voice assistant",
-        "Geofencing features",
-        "Offline-first architecture"
-      ],
-      githubUrl: "",
-      icon: <Smartphone className="w-6 h-6" />,
-      gradient: "from-purple-500 to-pink-500",
-      accentColor: "purple"
-    },
-    {
       title: "Daily News Android App",
       subtitle: "Native Android Application",
-      description: "Android application with Clean Architecture and MVVM patterns, providing seamless news reading with offline capabilities.",
-      technologies: ["Kotlin", "Retrofit", "Room Database", "MVVM"],
+      description: "Architected native Android application using Java and Kotlin with clean MVVM architecture and comprehensive unit testing.",
+      technologies: ["Java", "Kotlin", "Android SDK", "MVVM", "Unit Testing"],
       features: [
-        "Clean Architecture",
-        "Offline reading",
-        "Real-time updates"
+        "Clean MVVM Architecture",
+        "Offline-first with Room DB",
+        "Unit Testing Coverage"
       ],
       githubUrl: "https://github.com/ayush0210/-Daily-news-android",
       icon: <Cpu className="w-6 h-6" />,
       gradient: "from-indigo-500 to-purple-500",
       accentColor: "indigo"
+    },
+    {
+      title: "UF Research App",
+      subtitle: "Geofencing & AI-Driven Mobile App",
+      description: "Cross-platform React Native app with geofencing, OpenAI-powered voice assistant, and real-time WebSocket updates reducing task completion by 35%.",
+      technologies: ["React Native", "Express.js", "WebSocket", "OpenAI API", "MySQL"],
+      features: [
+        "AI voice assistant",
+        "Geofencing capabilities",
+        "Real-time WebSocket updates"
+      ],
+      githubUrl: "",
+      icon: <Smartphone className="w-6 h-6" />,
+      gradient: "from-purple-500 to-pink-500",
+      accentColor: "purple"
     }
   ];
 
@@ -245,7 +230,7 @@ const Projects = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
           style={{ perspective: 1000 }}
         >
           {projects.map((project, index) => (

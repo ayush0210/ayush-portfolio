@@ -221,8 +221,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              Crafting high-performance mobile applications with <span className="text-indigo-400">Kotlin</span>, <span className="text-purple-400">React Native</span>, and scalable backend systems.
-              Currently pursuing my Masters at the <span className="text-cyan-400">University of Florida</span>.
+              2+ years delivering <span className="text-indigo-400">scalable solutions</span> for millions of users. Strong CS fundamentals in building <span className="text-purple-400">fault-tolerant, distributed applications</span> with end-to-end ownership.
             </motion.p>
 
             {/* Tech stack pills */}
