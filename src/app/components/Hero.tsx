@@ -167,15 +167,28 @@ const Hero = () => {
         />
       </div>
 
-      {/* Floating particles */}
+      {/* Floating particles - using fixed positions to avoid hydration mismatch */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+        {[
+          { size: 4, left: '10%', top: '20%' },
+          { size: 6, left: '25%', top: '60%' },
+          { size: 3, left: '40%', top: '30%' },
+          { size: 5, left: '55%', top: '70%' },
+          { size: 4, left: '70%', top: '15%' },
+          { size: 7, left: '85%', top: '45%' },
+          { size: 3, left: '15%', top: '80%' },
+          { size: 5, left: '30%', top: '10%' },
+          { size: 4, left: '60%', top: '50%' },
+          { size: 6, left: '80%', top: '75%' },
+          { size: 3, left: '5%', top: '40%' },
+          { size: 5, left: '45%', top: '85%' },
+        ].map((particle, i) => (
           <Particle
             key={i}
-            delay={i * 0.3}
-            size={Math.random() * 6 + 2}
-            left={`${Math.random() * 100}%`}
-            top={`${Math.random() * 100}%`}
+            delay={i * 0.4}
+            size={particle.size}
+            left={particle.left}
+            top={particle.top}
           />
         ))}
       </div>
