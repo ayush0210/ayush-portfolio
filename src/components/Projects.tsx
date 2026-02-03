@@ -1,71 +1,55 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Github, Award, Users, Zap, Star } from 'lucide-react';
-import { useState } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { Github, ExternalLink, Smartphone, Globe, Cpu, ArrowUpRight } from 'lucide-react';
+import { useRef } from 'react';
 
 const Projects = () => {
-  const [expandedTech, setExpandedTech] = useState<Record<number, boolean>>({});
   const projects = [
     {
       title: "Interactive Learning Platform",
       subtitle: "React.js Learning Application",
-      description: "Architected a responsive React.js frontend with reusable UI components and custom hooks, achieving 40% faster development cycles and real-time content synchronization.",
-      image: "/images/projects/learning-platform.jpg",
-      technologies: ["React.js", "TypeScript", "Material-UI", "React Query", "Web Speech API", "CSS Modules"],
+      description: "Architected a responsive React.js frontend with reusable UI components and custom hooks, achieving 40% faster development cycles.",
+      technologies: ["React.js", "TypeScript", "Material-UI", "React Query"],
       features: [
-        "40% faster development cycles through reusable components",
-        "98% positive feedback on interface responsiveness", 
-        "Real-time content synchronization",
-        "Accessible design with ARIA attributes",
-        "35% reduction in initial load time"
+        "40% faster development cycles",
+        "98% positive feedback",
+        "Real-time synchronization"
       ],
       githubUrl: "https://github.com/ayush0210/quickquizz-frontend",
-      stats: {
-        icon: <Award className="w-5 h-5" />,
-        value: "React.js",
-        label: "Frontend App"
-      }
+      icon: <Globe className="w-6 h-6" />,
+      gradient: "from-blue-500 to-cyan-500",
+      accentColor: "cyan"
     },
     {
-      title: "UF Parenting Assistant App",
-      subtitle: "Geofencing & AI-Driven Content",
-      description: "Cross-platform app built with React Native that delivers location-based parenting tips, real-time updates via WebSocket, and OpenAI-powered voice assistant.",
-      image: "/images/projects/uf-parenting-app.jpg",
-      technologies: ["React Native", "Express.js", "MySQL", "WebSocket", "OpenAI API", "Redux"],
+      title: "UF Parenting Assistant",
+      subtitle: "Geofencing & AI-Driven App",
+      description: "Cross-platform React Native app with location-based tips, real-time WebSocket updates, and OpenAI-powered voice assistant.",
+      technologies: ["React Native", "Express.js", "WebSocket", "OpenAI API"],
       features: [
-        "Real-time updates with WebSocket",
-        "AI-generated tips using OpenAI API",
-        "Geolocation & geofencing features",
-        "Offline-first architecture with Async Storage",
-        "Voice assistant with speech recognition"
+        "AI-powered voice assistant",
+        "Geofencing features",
+        "Offline-first architecture"
       ],
       githubUrl: "",
-      stats: {
-        icon: <Zap className="w-5 h-5" />,
-        value: "Live",
-        label: "UF Research App"
-      }
+      icon: <Smartphone className="w-6 h-6" />,
+      gradient: "from-purple-500 to-pink-500",
+      accentColor: "purple"
     },
     {
       title: "Daily News Android App",
-      subtitle: "Android News Application",
-      description: "Android application providing seamless news reading experience with intuitive UI design and efficient data management using modern Android development practices.",
-      image: "/images/projects/daily-news.jpg",
-      technologies: ["Android", "Kotlin", "Retrofit", "Room Database", "Material Design", "MVVM Architecture"],
+      subtitle: "Native Android Application",
+      description: "Android application with Clean Architecture and MVVM patterns, providing seamless news reading with offline capabilities.",
+      technologies: ["Kotlin", "Retrofit", "Room Database", "MVVM"],
       features: [
-        "Clean and intuitive user interface",
-        "Efficient HTTP requests with Retrofit",
-        "Offline reading capabilities with Room Database",
-        "MVVM architecture for scalable code",
-        "Real-time news updates"
+        "Clean Architecture",
+        "Offline reading",
+        "Real-time updates"
       ],
       githubUrl: "https://github.com/ayush0210/-Daily-news-android",
-      stats: {
-        icon: <Star className="w-5 h-5" />,
-        value: "Android",
-        label: "Mobile App"
-      }
+      icon: <Cpu className="w-6 h-6" />,
+      gradient: "from-indigo-500 to-purple-500",
+      accentColor: "indigo"
     }
   ];
 
@@ -74,25 +58,164 @@ const Projects = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.3
+        staggerChildren: 0.2
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8
+        duration: 0.6,
+        ease: "easeOut"
       }
     }
   };
 
+  // 3D Card Component
+  const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: number }) => {
+    const cardRef = useRef<HTMLDivElement>(null);
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
+    const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), { stiffness: 300, damping: 30 });
+    const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), { stiffness: 300, damping: 30 });
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!cardRef.current) return;
+      const rect = cardRef.current.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      mouseX.set(x);
+      mouseY.set(y);
+    };
+
+    const handleMouseLeave = () => {
+      mouseX.set(0);
+      mouseY.set(0);
+    };
+
+    return (
+      <motion.div
+        ref={cardRef}
+        variants={itemVariants}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: "preserve-3d",
+        }}
+        className="relative group"
+      >
+        <div className="h-full glass rounded-2xl overflow-hidden border border-white/5 hover:border-white/10 transition-all duration-500">
+          {/* Card Header with gradient */}
+          <div className={`relative h-40 bg-gradient-to-br ${project.gradient} p-6 flex flex-col justify-between`}>
+            {/* Background pattern */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute inset-0" style={{
+                backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+                backgroundSize: '20px 20px'
+              }} />
+            </div>
+
+            <div className="relative z-10 flex justify-between items-start">
+              <div className="p-3 rounded-xl bg-white/20 backdrop-blur-sm">
+                {project.icon}
+              </div>
+              {project.githubUrl ? (
+                <motion.a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-colors"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <ExternalLink className="w-4 h-4" />
+                </motion.a>
+              ) : (
+                <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-xs font-medium">
+                  Private
+                </span>
+              )}
+            </div>
+
+            <div className="relative z-10">
+              <p className="text-white/80 text-sm font-medium mb-1">{project.subtitle}</p>
+              <h3 className="text-xl font-bold text-white">{project.title}</h3>
+            </div>
+          </div>
+
+          {/* Card Content */}
+          <div className="p-6">
+            <p className="text-gray-400 text-sm leading-relaxed mb-5">
+              {project.description}
+            </p>
+
+            {/* Features */}
+            <div className="mb-5 space-y-2">
+              {project.features.map((feature, idx) => (
+                <div key={idx} className="flex items-center gap-2 text-sm">
+                  <div className={`w-1.5 h-1.5 rounded-full bg-${project.accentColor}-500`} />
+                  <span className="text-gray-300">{feature}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Technologies */}
+            <div className="flex flex-wrap gap-2 mb-5">
+              {project.technologies.map((tech, idx) => (
+                <span
+                  key={idx}
+                  className="px-2.5 py-1 text-xs font-medium rounded-md bg-white/5 text-gray-300 border border-white/5"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            {/* Action Button */}
+            {project.githubUrl ? (
+              <motion.a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-white/5 text-white font-medium hover:bg-white/10 transition-colors group/btn"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Github className="w-4 h-4" />
+                View Source
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+              </motion.a>
+            ) : (
+              <div className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-white/5 text-gray-500 font-medium">
+                <Github className="w-4 h-4" />
+                Private Repository
+              </div>
+            )}
+          </div>
+
+          {/* Hover glow effect */}
+          <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 pointer-events-none rounded-2xl`} />
+        </div>
+      </motion.div>
+    );
+  };
+
   return (
-    <section id="projects" className="py-20 bg-white">
-      <div className="container mx-auto px-6">
+    <section id="projects" className="py-24 bg-[#0a0a0f] relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/3 -right-32 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/3 -left-32 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -100,11 +223,20 @@ const Projects = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
-            Featured Projects
+          <motion.span
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2 }}
+            viewport={{ once: true }}
+            className="inline-block px-4 py-1 rounded-full glass text-indigo-400 text-sm font-medium mb-4"
+          >
+            My Work
+          </motion.span>
+          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
+            Featured <span className="gradient-text">Projects</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Showcasing scalable applications and innovative solutions
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+            Showcasing scalable applications and innovative solutions I&apos;ve built
           </p>
         </motion.div>
 
@@ -113,113 +245,11 @@ const Projects = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          style={{ perspective: 1000 }}
         >
           {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-blue-200 hover:-translate-y-2"
-            >
-              {/* Project Image */}
-              <div className="relative h-48 bg-gradient-to-br from-blue-500 to-purple-600 overflow-hidden">
-                {/* Placeholder for now - replace with actual project screenshots */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-white text-6xl opacity-20">
-                    {index === 0 && <Award />}
-                    {index === 1 && <Users />}
-                    {index === 2 && <Star />}
-                  </div>
-                </div>
-                
-                {/* Stats Badge */}
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-2">
-                  <span className="text-blue-600">{project.stats.icon}</span>
-                  <div className="text-xs">
-                    <div className="font-bold text-gray-800">{project.stats.value}</div>
-                    <div className="text-gray-600">{project.stats.label}</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Project Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors duration-300">
-                  {project.title}
-                </h3>
-                
-                <p className="text-sm text-blue-600 font-semibold mb-3">
-                  {project.subtitle}
-                </p>
-                
-                <p className="text-gray-600 mb-4 leading-relaxed text-sm">
-                  {project.description}
-                </p>
-
-                {/* Key Features */}
-                <div className="mb-4">
-                  <h4 className="font-semibold text-gray-800 text-sm mb-2">Key Features:</h4>
-                  <ul className="text-xs text-gray-600 space-y-1">
-                    {project.features.slice(0, 3).map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-start gap-2">
-                        <Zap className="w-3 h-3 text-blue-600 mt-0.5 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Technologies */}
-                <div className="mb-6">
-                  <div className="flex flex-wrap gap-1 mb-3">
-                    {(expandedTech[index] ? project.technologies : project.technologies.slice(0, 4)).map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-md font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {project.technologies.length > 4 && !expandedTech[index] && (
-                      <button
-                        onClick={() => setExpandedTech(prev => ({...prev, [index]: true}))}
-                        className="px-2 py-1 bg-gray-50 text-gray-600 text-xs rounded-md hover:bg-gray-100 transition-colors duration-200 cursor-pointer"
-                      >
-                        +{project.technologies.length - 4} more
-                      </button>
-                    )}
-                    {expandedTech[index] && project.technologies.length > 4 && (
-                      <button
-                        onClick={() => setExpandedTech(prev => ({...prev, [index]: false}))}
-                        className="px-2 py-1 bg-gray-50 text-gray-600 text-xs rounded-md hover:bg-gray-100 transition-colors duration-200 cursor-pointer"
-                      >
-                        Show less
-                      </button>
-                    )}
-                  </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex gap-3">
-                  {project.githubUrl ? (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors duration-300 text-sm font-medium flex-1 justify-center"
-                    >
-                      <Github className="w-4 h-4" />
-                      View Code
-                    </a>
-                  ) : (
-                    <div className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-500 rounded-lg text-sm font-medium flex-1 justify-center">
-                      <Github className="w-4 h-4" />
-                      Private Repository
-                    </div>
-                  )}
-                </div>
-              </div>
-            </motion.div>
+            <ProjectCard key={index} project={project} index={index} />
           ))}
         </motion.div>
 
@@ -227,26 +257,29 @@ const Projects = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <div className="bg-gray-50 rounded-2xl p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">
-              Want to see more?
+          <div className="glass rounded-2xl p-8 max-w-xl mx-auto">
+            <h3 className="text-xl font-semibold text-white mb-3">
+              Explore More Projects
             </h3>
-            <p className="text-gray-600 mb-6">
-              Check out my GitHub for more projects, code samples, and contributions to open source.
+            <p className="text-gray-400 text-sm mb-6">
+              Check out my GitHub for more projects, code samples, and open source contributions.
             </p>
-            <a
+            <motion.a
               href="https://github.com/ayush0210"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-gray-800 text-white px-8 py-3 rounded-xl font-semibold hover:bg-gray-700 transition-all duration-300 hover:transform hover:-translate-y-1"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg hover:shadow-indigo-500/25 transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               <Github className="w-5 h-5" />
               View GitHub Profile
-            </a>
+              <ArrowUpRight className="w-4 h-4" />
+            </motion.a>
           </div>
         </motion.div>
       </div>

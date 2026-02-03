@@ -17,7 +17,6 @@ const Header = () => {
     { name: 'Contact', href: '#contact' },
   ];
 
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 50;
@@ -42,11 +41,10 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Smooth scroll to section
   const scrollToSection = (href: string) => {
     const targetId = href.replace('#', '');
     const element = document.getElementById(targetId);
-    
+
     if (element) {
       const headerOffset = 80;
       const elementPosition = element.offsetTop;
@@ -57,7 +55,7 @@ const Header = () => {
         behavior: 'smooth'
       });
     }
-    
+
     setIsOpen(false);
   };
 
@@ -65,11 +63,11 @@ const Header = () => {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.8 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100' 
-          : 'bg-white/90 backdrop-blur-sm'
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? 'glass-dark shadow-2xl shadow-black/20'
+          : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-6">
@@ -87,9 +85,9 @@ const Header = () => {
                 e.preventDefault();
                 scrollToSection('#home');
               }}
-              className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
+              className="text-2xl font-bold gradient-text hover:opacity-80 transition-opacity duration-300"
             >
-              Ayush Mishra
+              AM
             </a>
           </motion.div>
 
@@ -98,7 +96,7 @@ const Header = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="hidden md:flex items-center space-x-8"
+            className="hidden md:flex items-center space-x-1"
           >
             {navItems.map((item, index) => (
               <motion.a
@@ -111,17 +109,17 @@ const Header = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
-                className={`relative font-medium transition-all duration-300 hover:text-blue-600 ${
+                className={`relative px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
                   activeSection === item.href.replace('#', '')
-                    ? 'text-blue-600'
-                    : 'text-gray-700'
+                    ? 'text-white'
+                    : 'text-gray-400 hover:text-white'
                 }`}
               >
                 {item.name}
                 {activeSection === item.href.replace('#', '') && (
                   <motion.div
-                    layoutId="activeSection"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-600 rounded-full"
+                    layoutId="activeNav"
+                    className="absolute inset-0 bg-white/10 rounded-lg -z-10"
                     initial={false}
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
@@ -135,28 +133,32 @@ const Header = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="hidden md:flex items-center space-x-4"
+            className="hidden md:flex items-center space-x-3"
           >
-            <a
+            <motion.a
               href="/resume.pdf"
               download
-              className="flex items-center gap-2 px-4 py-2 text-blue-600 font-medium hover:text-blue-700 transition-colors duration-300"
+              className="flex items-center gap-2 px-4 py-2 text-gray-300 font-medium text-sm hover:text-white transition-colors duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               <Download className="w-4 h-4" />
               Resume
-            </a>
-            
-            <a
+            </motion.a>
+
+            <motion.a
               href="#contact"
               onClick={(e) => {
                 e.preventDefault();
                 scrollToSection('#contact');
               }}
-              className="flex items-center gap-2 bg-blue-600 text-white px-6 py-2 rounded-full font-medium hover:bg-blue-700 transition-all duration-300 hover:transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
+              className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-5 py-2 rounded-lg font-medium text-sm hover:shadow-lg hover:shadow-indigo-500/25 transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               <Mail className="w-4 h-4" />
-              Contact
-            </a>
+              Hire Me
+            </motion.a>
           </motion.div>
 
           {/* Mobile Menu Button */}
@@ -165,14 +167,32 @@ const Header = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-300"
+            className="md:hidden p-2 rounded-lg glass hover:bg-white/10 transition-colors duration-300"
             aria-label="Toggle menu"
           >
-            {isOpen ? (
-              <X className="w-6 h-6 text-gray-700" />
-            ) : (
-              <Menu className="w-6 h-6 text-gray-700" />
-            )}
+            <AnimatePresence mode="wait">
+              {isOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X className="w-6 h-6 text-white" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Menu className="w-6 h-6 text-white" />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.button>
         </div>
 
@@ -184,9 +204,9 @@ const Header = () => {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden border-t border-gray-100 py-4"
+              className="md:hidden border-t border-white/10 py-4"
             >
-              <nav className="flex flex-col space-y-4">
+              <nav className="flex flex-col space-y-2">
                 {navItems.map((item, index) => (
                   <motion.a
                     key={item.name}
@@ -197,38 +217,38 @@ const Header = () => {
                     }}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    className={`px-4 py-3 rounded-lg font-medium transition-all duration-300 ${
                       activeSection === item.href.replace('#', '')
-                        ? 'text-blue-600 bg-blue-50'
-                        : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                        ? 'text-white bg-white/10'
+                        : 'text-gray-400 hover:text-white hover:bg-white/5'
                     }`}
                   >
                     {item.name}
                   </motion.a>
                 ))}
-                
+
                 {/* Mobile CTA Buttons */}
-                <div className="pt-4 space-y-3 border-t border-gray-100">
+                <div className="pt-4 space-y-3 border-t border-white/10 mt-2">
                   <a
                     href="/resume.pdf"
                     download
-                    className="flex items-center justify-center gap-2 px-4 py-3 border border-blue-600 text-blue-600 rounded-lg font-medium hover:bg-blue-50 transition-colors duration-300"
+                    className="flex items-center justify-center gap-2 px-4 py-3 glass text-white rounded-lg font-medium hover:bg-white/10 transition-colors duration-300"
                   >
                     <Download className="w-4 h-4" />
                     Download Resume
                   </a>
-                  
+
                   <a
                     href="#contact"
                     onClick={(e) => {
                       e.preventDefault();
                       scrollToSection('#contact');
                     }}
-                    className="flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300"
+                    className="flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity duration-300"
                   >
                     <Mail className="w-4 h-4" />
-                    Contact Me
+                    Hire Me
                   </a>
                 </div>
               </nav>
