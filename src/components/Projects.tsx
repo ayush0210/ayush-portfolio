@@ -22,16 +22,16 @@ const Projects = () => {
       accentColor: "indigo"
     },
     {
-      title: "UF Research App",
-      subtitle: "Geofencing & AI-Driven Mobile App",
-      description: "Cross-platform React Native app with geofencing, OpenAI-powered voice assistant, and real-time WebSocket updates reducing task completion by 35%.",
-      technologies: ["React Native", "Express.js", "WebSocket", "OpenAI API", "MySQL"],
+      title: "Social Media Analysis",
+      subtitle: "Data & NLP Analytics",
+      description: "Built an end-to-end analysis pipeline to extract trends, sentiment, and engagement signals from social media data with clear visual insights.",
+      technologies: ["Python", "Pandas", "NLP", "Data Visualization", "Jupyter"],
       features: [
-        "AI voice assistant",
-        "Geofencing capabilities",
-        "Real-time WebSocket updates"
+        "Sentiment and trend analysis",
+        "Engagement insights",
+        "Reproducible analysis workflow"
       ],
-      githubUrl: "",
+      githubUrl: "https://github.com/ayush0210/SocialMediaAnalysis",
       icon: <Smartphone className="w-6 h-6" />,
       gradient: "from-purple-500 to-pink-500",
       accentColor: "purple"
@@ -61,7 +61,7 @@ const Projects = () => {
   };
 
   // 3D Card Component
-  const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: number }) => {
+  const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
     const cardRef = useRef<HTMLDivElement>(null);
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
@@ -234,7 +234,7 @@ const Projects = () => {
           style={{ perspective: 1000 }}
         >
           {projects.map((project, index) => (
-            <ProjectCard key={index} project={project} index={index} />
+            <ProjectCard key={index} project={project} />
           ))}
         </motion.div>
 

@@ -7,17 +7,19 @@ const Experience = () => {
   const experiences = [
     {
       company: "University of Florida",
-      position: "Mobile Software Engineer",
+      position: "Software Engineer (Full Stack / Mobile)",
       duration: "August 2024 – Present",
       location: "Gainesville, FL",
-      description: "Leading end-to-end solution design and delivery for production-ready Android applications using Kotlin and Android SDK.",
+      description: "Architecting and delivering a React Native app with AI-driven features, real-time updates, and native module integrations.",
       achievements: [
-        "Implemented CI/CD pipelines using GitHub Actions, reducing deployment time",
-        "Built scalable backend solutions with WebSocket integration, reducing server load by 30%",
-        "Created comprehensive test strategy and automation framework, improving test coverage by 25%",
-        "Applied Clean Architecture principles and MVVM patterns for maintainable code structure"
+        "Designed a React Native app with geofencing and OpenAI-powered content generation, including a voice assistant via speech recognition",
+        "Partnered with product to ship AI-driven tip generation and voice workflows, reducing task completion time by 35%",
+        "Optimized API call handling and integrated WebSocket updates, reducing backend load by 30%",
+        "Led native module integration via React Native bridge, improving modularity and native performance by 15%",
+        "Implemented comprehensive unit testing with Jest to improve coverage and reliability",
+        "Owned feature pipelines end-to-end from system design through deployment with accessibility and scalability goals"
       ],
-      technologies: ["Android SDK", "Kotlin", "React Native", "Express.js", "MySQL", "CI/CD"],
+      technologies: ["React Native", "JavaScript", "Express.js", "MySQL", "OpenAI API", "WebSocket", "Geolocation", "Voice Recognition", "Jest"],
       current: true,
       color: "from-indigo-500 to-purple-500"
     },
@@ -26,14 +28,15 @@ const Experience = () => {
       position: "Android Developer",
       duration: "June 2022 - July 2023",
       location: "Mumbai, India",
-      description: "Delivered complex Android features for video streaming infrastructure using ExoPlayer, successfully scaling to 22.7M concurrent users.",
+      description: "Built Android video streaming infrastructure at massive scale using ExoPlayer and modern Android architecture.",
       achievements: [
         "Scaled platform to support 22.7M concurrent users during FIFA World Cup 2022",
-        "Led technical strategy for adaptive bitrate algorithms reducing streaming latency by 40%",
-        "Architected real-time analytics pipeline using Kotlin Coroutines and State Flows",
-        "Designed custom video player components using Jetpack Compose and Material Design 3"
+        "Developed adaptive bitrate and buffer management algorithms, reducing streaming latency by 40%",
+        "Architected real-time analytics pipeline with Kotlin Coroutines, processing billions of video views",
+        "Collaborated across product, infrastructure, and QA to maintain 90%+ feature parity across platforms",
+        "Built modular video player components using Jetpack Compose and Material Design 3 with PiP and background playback"
       ],
-      technologies: ["Kotlin", "Android SDK", "Jetpack Compose", "ExoPlayer", "Room", "Firebase"],
+      technologies: ["Kotlin", "Jetpack Compose", "ExoPlayer", "Room", "Coroutines", "Flow", "Firebase", "Retrofit", "WorkManager"],
       current: false,
       color: "from-cyan-500 to-blue-500"
     }

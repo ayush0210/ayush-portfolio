@@ -114,7 +114,7 @@ const Contact = () => {
                 <span className="text-green-400 font-semibold">Available for Opportunities</span>
               </div>
               <p className="text-gray-400 text-sm">
-                Seeking full-time positions starting May 2025. Open to internships and part-time projects.
+                Open to full-time software engineering roles and contract projects.
               </p>
             </div>
 

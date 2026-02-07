@@ -11,30 +11,30 @@ const About = () => {
   const skills = [
     {
       icon: <Smartphone className="w-7 h-7" />,
-      title: "Mobile Development",
-      description: "Native Android with Kotlin & Java, React Native for cross-platform apps",
-      technologies: ["Kotlin", "Java", "Android SDK", "React Native", "ExoPlayer", "Jetpack Compose"],
+      title: "Mobile Engineering",
+      description: "Production Android and cross-platform apps with a focus on reliability and performance",
+      technologies: ["Kotlin", "Java", "Android SDK", "React Native", "Jetpack Compose", "ExoPlayer"],
       color: "from-indigo-500 to-purple-500"
     },
     {
       icon: <Code className="w-7 h-7" />,
-      title: "Frontend Development",
-      description: "Modern web applications with React ecosystem and TypeScript",
-      technologies: ["React.js", "TypeScript", "JavaScript", "Next.js", "Material-UI", "Tailwind CSS"],
+      title: "Frontend Engineering",
+      description: "Modern, accessible web applications with strong UI performance",
+      technologies: ["React.js", "TypeScript", "Next.js", "JavaScript", "Tailwind CSS", "Material-UI"],
       color: "from-purple-500 to-pink-500"
     },
     {
       icon: <Server className="w-7 h-7" />,
-      title: "Backend Development",
-      description: "Scalable APIs and database design for mobile applications",
-      technologies: ["Express.js", "Node.js", "RESTful APIs", "MySQL", "MongoDB", "WebSocket"],
+      title: "Backend Engineering",
+      description: "Scalable APIs and data services built for reliability and throughput",
+      technologies: ["Node.js", "Express.js", "REST APIs", "WebSocket", "MySQL", "MongoDB"],
       color: "from-cyan-500 to-blue-500"
     },
     {
       icon: <Settings className="w-7 h-7" />,
-      title: "Architecture & Tools",
-      description: "Clean architecture patterns and modern development workflow",
-      technologies: ["MVVM", "Repository Pattern", "Git", "Firebase", "CI/CD", "Gradle"],
+      title: "Systems & Quality",
+      description: "Clean architecture, testing, and delivery practices for maintainable systems",
+      technologies: ["Clean Architecture", "MVVM", "Testing", "CI/CD", "Git", "Gradle"],
       color: "from-green-500 to-emerald-500"
     }
   ];
@@ -42,7 +42,7 @@ const About = () => {
   const stats = [
     { value: "22.7M+", label: "Concurrent Users", suffix: "" },
     { value: "40%", label: "Latency Reduction", suffix: "" },
-    { value: "3+", label: "Years Experience", suffix: "" },
+    { value: "2+", label: "Years Experience", suffix: "" },
   ];
 
   const containerVariants = {
@@ -201,7 +201,7 @@ const About = () => {
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 rounded-full bg-cyan-500 mt-2" />
                   <p className="text-gray-400 text-sm">
-                    Currently pursuing <span className="text-white">Masters in CS</span> at University of Florida
+                    M.S. in Computer Science, <span className="text-white">University of Florida</span> (May 2025)
                   </p>
                 </div>
                 <div className="flex items-start gap-3">

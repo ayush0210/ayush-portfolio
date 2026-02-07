@@ -2,6 +2,7 @@
 
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { Mail, Code, Download, ChevronDown, Sparkles } from 'lucide-react';
+import Image from 'next/image';
 import { useEffect, useState, useRef } from 'react';
 
 const Hero = () => {
@@ -11,13 +12,6 @@ const Hero = () => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const containerRef = useRef<HTMLElement>(null);
-
-  const roles = [
-    'Android Developer',
-    'Mobile Engineer',
-    'Full Stack Developer',
-    'Software Architect'
-  ];
 
   // Smooth spring animation for mouse movement
   const springConfig = { damping: 25, stiffness: 150 };
@@ -30,6 +24,12 @@ const Hero = () => {
 
   // Typewriter effect
   useEffect(() => {
+    const roles = [
+      'Software Engineer',
+      'Mobile Engineer',
+      'Full Stack Engineer',
+      'Backend Engineer'
+    ];
     const currentText = roles[currentRole];
     const timeout = setTimeout(() => {
       if (!isDeleting) {
@@ -49,7 +49,7 @@ const Hero = () => {
     }, isDeleting ? 50 : 100);
 
     return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentRole, roles]);
+  }, [displayText, isDeleting, currentRole]);
 
   // Mouse tracking
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -234,7 +234,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              2+ years delivering <span className="text-indigo-400">scalable solutions</span> for millions of users. Strong CS fundamentals in building <span className="text-purple-400">fault-tolerant, distributed applications</span> with end-to-end ownership.
+              2+ years delivering <span className="text-indigo-400">scalable software</span> for millions of users. Strong CS fundamentals in building <span className="text-purple-400">reliable, distributed systems</span> with end-to-end ownership across mobile, web, and backend.
             </motion.p>
 
             {/* Tech stack pills */}
@@ -349,15 +349,12 @@ const Hero = () => {
 
                 {/* Image */}
                 <div className="absolute inset-2 rounded-full overflow-hidden">
-                  <img
+                  <Image
                     src="/images/profile.jpg"
                     alt="Ayush Mishra"
-                    className="w-full h-full object-cover"
-                    style={{
-                      display: 'block',
-                      objectFit: 'cover',
-                      objectPosition: 'center'
-                    }}
+                    fill
+                    className="object-cover"
+                    priority
                   />
                 </div>
 
